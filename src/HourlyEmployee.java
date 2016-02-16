@@ -14,6 +14,7 @@ public class HourlyEmployee implements Employee {
             return wage;
         } else {
             wage = hourlyWage * hoursWorked;
+            wage *= 1.2;
             return wage;
         }
     }
