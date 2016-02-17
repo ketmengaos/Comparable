@@ -32,7 +32,6 @@ public class EmployeeRecords {
 
         double totalPayroll = 0;
         int totalHours = 0;
-        int numEmployees = 0;
         String employeeClass;
 
         int hCount = 0;
@@ -65,7 +64,6 @@ public class EmployeeRecords {
                 double hourlyWage = Double.parseDouble(employee[2]);
                 int hoursWorked = Integer.parseInt(employee[3]);
                 employeeClass = employee[1];
-
 
                 //Switch statements for figuring out which kind of employee employee[1] would be, then creating the appropiate objects.
                 switch (employee[1]) {

@@ -2,6 +2,7 @@ public class HourlyEmployee implements Employee {
 
     double wage;
     double hourlyWage;
+    double basePay;
     int hoursWorked;
     String idNumber;
     String employeeClass;
@@ -17,9 +18,10 @@ public class HourlyEmployee implements Employee {
     //Allows us to calculate pay, then returns the pay.
     public double calculatePay() {
         if (this.hoursWorked > 40) {
+            basePay = (hoursWorked * hourlyWage) * .2;
             this.wage = this.hourlyWage * 40;
             this.wage += (this.hourlyWage * 1.5) * (this.hoursWorked - 40);
-            this.wage *= 1.2;
+            this.wage += basePay;
             return this.wage;
         } else {
             this.wage = (hourlyWage * hoursWorked) * 1.2;
