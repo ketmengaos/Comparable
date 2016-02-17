@@ -3,7 +3,6 @@ public class PartTimeEmployee implements Employee {
     double hourlyWage;
     double wage;
     int hoursWorked;
-    int empCount = 0;
     String idNumber;
 
     public PartTimeEmployee(String idNumber, double hourlyWage, int hoursWorked) {
@@ -14,7 +13,6 @@ public class PartTimeEmployee implements Employee {
 
     public double calculatePay() {
         this.wage = this.hourlyWage * this.hoursWorked;
-        this.empCount++;
         return this.wage;
     }
 

@@ -3,7 +3,6 @@ public class SalariedEmployee implements Employee {
     double hourlyWage; //Note, hourlyWage will simply refer to their weekly pay.
     double wage;
     int hoursWorked;
-    int empCount = 0;
     String idNumber;
 
     public SalariedEmployee(String idNumber, double hourlyWage, int hoursWorked) {
@@ -14,7 +13,6 @@ public class SalariedEmployee implements Employee {
 
     public double calculatePay() {
         this.wage = this.hourlyWage * 1.2;
-        this.empCount++;
         return this.wage;
     }
 

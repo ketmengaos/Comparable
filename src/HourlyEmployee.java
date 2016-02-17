@@ -3,7 +3,6 @@ public class HourlyEmployee implements Employee {
     double wage;
     double hourlyWage;
     int hoursWorked;
-    int empCount = 0;
     String idNumber;
 
     public HourlyEmployee(String idNumber, double hourlyWage, int hoursWorked) {
@@ -17,7 +16,6 @@ public class HourlyEmployee implements Employee {
             this.wage = this.hourlyWage * 40;
             this.wage += (this.hourlyWage * 1.5) * (this.hoursWorked - 40);
             this.wage *= 1.2;
-            this.empCount++; //Counts employees.
             return this.wage;
         } else {
             this.wage = (hourlyWage * hoursWorked) * 1.2;

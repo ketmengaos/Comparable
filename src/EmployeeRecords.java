@@ -16,10 +16,14 @@ public class EmployeeRecords {
 
     public static void main(String[] arg) {
 
+        double totalPayroll = 0;
         int totalHours = 0;
-        int counter = 0;
         int numEmployees = 0;
-        int lines = 0;
+
+        int hCount = 0;
+        int sCount = 0;
+        int pCount = 0;
+        int iCount = 0;
 
         //This takes the input of the file "List.txt" and places each value in an array in the order:
         //ID Number | Class | Wage | Hours Worked.
@@ -27,6 +31,8 @@ public class EmployeeRecords {
         //Each value is separated by a space.
         //I used this to extract the number of lines for the arrays that will order the employees.
 
+        //Legacy Code - To be Removed
+        /*
         try {
             BufferedReader reader = new BufferedReader(new FileReader("List.txt"));
             while (reader.readLine() != null)
@@ -37,10 +43,11 @@ public class EmployeeRecords {
         } catch (IOException e) {
             System.out.print("IO Exception Error.");
         }
+        */
 
         String word;
         try {
-            Scanner scan = new Scanner(new FileReader("List.txt"));
+            Scanner scan = new Scanner(new FileReader("List.txt")); //Takes input from List.txt (included, documentation on formatting above.)
 
             ArrayList<Employee> employeeArray = new ArrayList<Employee>();
 
@@ -68,31 +75,34 @@ public class EmployeeRecords {
                     case "H":
                         HourlyEmployee hourlyEmployee = new HourlyEmployee(employee[0], hourlyWage, hoursWorked);
                         hourlyEmployee.calculatePay();
+                        totalPayroll += hourlyEmployee.calculatePay();
                         hourlyEmployee.getPay();
                         totalHours += hourlyEmployee.getHours();
                         employeeArray.add(hourlyEmployee);
-                        counter++;
+                        hCount++;
                         break;
                     case "S":
                         SalariedEmployee salariedEmployee = new SalariedEmployee(employee[0], hourlyWage, hoursWorked);
                         salariedEmployee.calculatePay();
+                        totalPayroll += salariedEmployee.calculatePay();
                         totalHours += salariedEmployee.getHours();
                         employeeArray.add(salariedEmployee);
-                        counter++;
+                        sCount++;
                         break;
                     case "P":
                         PartTimeEmployee partTimeEmployee = new PartTimeEmployee(employee[0], hourlyWage, hoursWorked);
                         partTimeEmployee.calculatePay();
+                        totalPayroll += partTimeEmployee.calculatePay();
                         totalHours += partTimeEmployee.getHours();
                         employeeArray.add(partTimeEmployee);
-                        counter++;
+                        pCount++;
                         break;
                     case "I":
                         Intern intern = new Intern(employee[0], hourlyWage, hoursWorked);
                         intern.calculatePay();
                         totalHours += intern.getHours();
                         employeeArray.add(intern);
-                        counter++;
+                        iCount++;
                         break;
                     default:
                         System.out.println("Illegal Parameter. Closing program.");
@@ -105,6 +115,7 @@ public class EmployeeRecords {
 
             for(int i = 0; i < employeeArray.size(); i++) {
                 System.out.println(employeeArray.get(i) + "\n");
+
             }
 
         } catch (FileNotFoundException e) {
@@ -112,6 +123,10 @@ public class EmployeeRecords {
             System.exit(0);
         }
         System.out.println("Total Hours Worked: " + totalHours);
-
+        System.out.println("Total Employees:");
+        System.out.println("Hourly Employees: " + hCount);
+        System.out.println("Salaried Employees:" + sCount);
+        System.out.println("Part-Time Employees:  " + pCount);
+        System.out.println("Interns: " + iCount);
     }
 }

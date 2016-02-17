@@ -3,7 +3,6 @@ public class Intern implements Employee{
     double hourlyWage;
     double wage;
     int hoursWorked;
-    int empCount = 0;
     String idNumber;
 
     public Intern(String idNumber, double hourlyWage, int hoursWorked) {
@@ -14,7 +13,6 @@ public class Intern implements Employee{
 
     public double calculatePay() {
         this.wage = 0;
-        this.empCount++;
         return 0;
     }
 
