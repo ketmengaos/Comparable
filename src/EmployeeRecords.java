@@ -6,7 +6,7 @@ import java.util.Collections;
 public class EmployeeRecords {
 
     //Four Classes: Hourly, Salary, Part-Time, Intern
-    //Hourly: Hourly wage, 1.5x multiplier for overtime > 40 hours.
+    //Hourly: Hourly wage, 1.5x multiplier for overtime > 40 hours. Has 20% in benefits.
     //Salaried Employee: Fixed weekly base salary + 20% bonus for benefits. No overtime.
     //Part-Time Employee: Paid hourly wage for each hour worked, no benefits/overtime pay.
     //Intern: No pay.
@@ -26,54 +26,28 @@ public class EmployeeRecords {
         int pCount = 0;
         int iCount = 0;
 
+        //IMPORTANT:
         //This takes the input of the file "List.txt" and places each value in an array in the order:
         //ID Number | Class | Wage | Hours Worked.
         //ID Number | Class | Wage (Or Weekly Payment if Salaried Employee) | Hours Worked.
         //Each value is separated by a space.
         //I used this to extract the number of lines for the arrays that will order the employees.
-
-        //Legacy Code - To be Removed
-        /*
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader("List.txt"));
-            while (reader.readLine() != null)
-                lines++;
-            reader.close();
-        } catch (FileNotFoundException ex) {
-            System.out.println("FileNotFoundException Error.");
-        } catch (IOException e) {
-            System.out.print("IO Exception Error.");
-        }
-        */
+        //List is included.
 
         String word;
         try {
             Scanner scan = new Scanner(new FileReader("List.txt")); //Takes input from List.txt (included, documentation on formatting above.)
 
+            //Create a new array and store each new object inside the arraylist.
             ArrayList<Employee> employeeArray = new ArrayList<Employee>();
 
             while (scan.hasNextLine()) {
                 word = scan.nextLine();
-                String[] employee = word.split("[ ]");
-
-                //Unnecessary, saved for future use if needed.
-                //totalHours += Integer.parseInt(employee[3]); // Parses the hours from each time card.
-
-                //Debugging
-                /*
-                System.out.print(employee[0] + " ");
-                System.out.print(employee[1] + " ");
-                System.out.print(employee[2] + " ");
-                System.out.print(employee[3] + " ");
-                System.out.println();
-                */
-                //End Debugging
+                String[] employee = word.split("[ ]"); //Splits each line via split method with appropriate regex to cut at every space.
 
                 double hourlyWage = Double.parseDouble(employee[2]);
                 int hoursWorked = Integer.parseInt(employee[3]);
                 employeeClass = employee[1];
-
-                //Create a new arrays and store each new object inside the arrayslist.
 
                 switch (employee[1]) {
                     case "H":
@@ -119,8 +93,7 @@ public class EmployeeRecords {
 
             System.out.println("Employee List: (Sort: Highest Paid)");
             for(int i = 0; i < employeeArray.size(); i++) {
-                System.out.println(employeeArray.get(i));
-
+                System.out.println(employeeArray.get(i)); //Fetches each of the objects stored in our array.
             }
 
         } catch (FileNotFoundException e) {
