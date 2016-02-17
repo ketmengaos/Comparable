@@ -1,23 +1,42 @@
 public class PartTimeEmployee implements Employee {
 
+    double hourlyWage;
     double wage;
-    int empCount = 0;
+    int hoursWorked;
+    String idNumber;
+    String employeeClass;
 
-    public double calculatePay(double hourlyWage, double hoursWorked) {
-        wage = hourlyWage * hoursWorked;
-        this.empCount++;
-        return wage;
+    public PartTimeEmployee(String idNumber, double hourlyWage, int hoursWorked, String employeeClass) {
+        this.idNumber = idNumber;
+        this.hourlyWage = hourlyWage;
+        this.hoursWorked = hoursWorked;
+        this.employeeClass = employeeClass;
     }
 
-    public double getPay(double hourlyWage) {
-        return hourlyWage;
+    public double calculatePay() {
+        this.wage = this.hourlyWage * this.hoursWorked;
+        return this.wage;
     }
 
-    public int getHours(int hoursWorked) {
-        return hoursWorked;
+    public double getPay() {
+        return this.hourlyWage;
+    }
+
+    public int getHours() {
+        return this.hoursWorked;
     }
 
     public int compareTo(Object o) {
+        Employee otherType = (Employee)o;
+        double oWage = otherType.calculatePay();
+        if (this.wage > oWage)
+            return -1;
+        else if (this.wage < oWage)
+            return 1;
+        else return 0;
+    }
 
+    public String toString() {
+        return this.idNumber + " " + this.employeeClass + " " + this.hourlyWage + " " + this.hoursWorked;
     }
 }
