@@ -2,9 +2,9 @@ public class HourlyEmployee implements Employee {
 
     double wage;
     double hourlyWage;
-    String idNumber;
     int hoursWorked;
     int empCount = 0;
+    String idNumber;
 
     public HourlyEmployee(String idNumber, double hourlyWage, int hoursWorked) {
         this.idNumber = idNumber;
@@ -12,12 +12,12 @@ public class HourlyEmployee implements Employee {
         this.hoursWorked = hoursWorked;
     }
 
-    public double calculatePay(double hourlyWage, int hoursWorked) {
-        if (hoursWorked > 40) {
-            this.wage = hourlyWage * 40;
-            this.wage += (hourlyWage * 1.5) * (hoursWorked - 40);
+    public double calculatePay() {
+        if (this.hoursWorked > 40) {
+            this.wage = this.hourlyWage * 40;
+            this.wage += (this.hourlyWage * 1.5) * (this.hoursWorked - 40);
             this.wage *= 1.2;
-            this.empCount++;
+            this.empCount++; //Counts employees.
             return this.wage;
         } else {
             this.wage = (hourlyWage * hoursWorked) * 1.2;
@@ -25,26 +25,20 @@ public class HourlyEmployee implements Employee {
         }
     }
 
-    public double getPay(double hourlyWage) {
-        return hourlyWage;
+    public double getPay() {
+        return this.hourlyWage;
     }
 
-    public int getHours(int hoursWorked) {
-        return hoursWorked;
+    public int getHours() {
+        return this.hoursWorked;
     }
 
-    public int compareTo(Object o, String string) {
-        HourlyEmployee pay = (pay)o;
-
+    public int compareTo(Object o) {
+        HourlyEmployee pay = (HourlyEmployee)o;
         if (this.wage > pay.wage)
             return 1;
         if (this.wage < pay.wage)
             return -1;
         else return 0;
     }
-
-    public String toString() {
-
-    }
-
 }

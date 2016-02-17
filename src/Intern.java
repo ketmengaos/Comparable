@@ -1,9 +1,10 @@
 public class Intern implements Employee{
 
-    String idNumber;
     double hourlyWage;
     double wage;
     int hoursWorked;
+    int empCount = 0;
+    String idNumber;
 
     public Intern(String idNumber, double hourlyWage, int hoursWorked) {
         this.idNumber = idNumber;
@@ -13,6 +14,7 @@ public class Intern implements Employee{
 
     public double calculatePay() {
         this.wage = 0;
+        this.empCount++;
         return 0;
     }
 
@@ -20,16 +22,15 @@ public class Intern implements Employee{
         return 0;
     }
 
-    public int getHours(int hoursWorked) {
-        return hoursWorked;
+    public int getHours() {
+        return this.hoursWorked;
     }
 
     public int compareTo(Object o) {
-        Employee otherEmployee = (Employee)o;
-
-        if (this.wage > otherPay)
+        Intern pay = (Intern)o;
+        if (this.wage > pay.wage)
             return 1;
-        if (this.wage < otherPay)
+        if (this.wage < pay.wage)
             return -1;
         else return 0;
     }

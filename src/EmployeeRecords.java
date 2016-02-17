@@ -67,29 +67,30 @@ public class EmployeeRecords {
                 switch (employee[1]) {
                     case "H":
                         HourlyEmployee hourlyEmployee = new HourlyEmployee(employee[0], hourlyWage, hoursWorked);
-                        hourlyEmployee.calculatePay(hourlyWage, hoursWorked);
-                        totalHours += hourlyEmployee.getHours(hoursWorked);
+                        hourlyEmployee.calculatePay();
+                        hourlyEmployee.getPay();
+                        totalHours += hourlyEmployee.getHours();
                         employeeArray.add(hourlyEmployee);
                         counter++;
                         break;
                     case "S":
                         SalariedEmployee salariedEmployee = new SalariedEmployee(employee[0], hourlyWage, hoursWorked);
-                        salariedEmployee.calculatePay(hourlyWage);
-                        totalHours += salariedEmployee.getHours(hoursWorked);
+                        salariedEmployee.calculatePay();
+                        totalHours += salariedEmployee.getHours();
                         employeeArray.add(salariedEmployee);
                         counter++;
                         break;
                     case "P":
                         PartTimeEmployee partTimeEmployee = new PartTimeEmployee(employee[0], hourlyWage, hoursWorked);
-                        partTimeEmployee.calculatePay(hourlyWage, hoursWorked);
-                        totalHours += partTimeEmployee.getHours(hoursWorked);
+                        partTimeEmployee.calculatePay();
+                        totalHours += partTimeEmployee.getHours();
                         employeeArray.add(partTimeEmployee);
                         counter++;
                         break;
                     case "I":
                         Intern intern = new Intern(employee[0], hourlyWage, hoursWorked);
                         intern.calculatePay();
-                        totalHours += intern.getHours(hoursWorked);
+                        totalHours += intern.getHours();
                         employeeArray.add(intern);
                         counter++;
                         break;
@@ -101,6 +102,10 @@ public class EmployeeRecords {
             }
 
             Collections.sort(employeeArray);
+
+            for(int i = 0; i < employeeArray.size(); i++) {
+                System.out.println(employeeArray.get(i) + "\n");
+            }
 
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found. Please try again.");
