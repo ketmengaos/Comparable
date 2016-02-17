@@ -128,12 +128,12 @@ public class EmployeeRecords {
             System.exit(0);
         }
         System.out.println();
-        System.out.println("Total Payroll for the Week: " + totalPayroll);
+        System.out.printf("Total Payroll for the Week: $%.2f%n", totalPayroll);
         System.out.println("Total Hours Worked: " + totalHours);
         System.out.println("Total Employees:");
-        System.out.println("Hourly Employees: " + hCount);
-        System.out.println("Salaried Employees:" + sCount);
-        System.out.println("Part-Time Employees:  " + pCount);
-        System.out.println("Interns: " + iCount);
+        System.out.println("   Hourly: " + hCount);
+        System.out.println("   Salaried: " + sCount);
+        System.out.println("   Part-Time:  " + pCount);
+        System.out.println("   Interns: " + iCount);
     }
 }
