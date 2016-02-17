@@ -1,3 +1,17 @@
+//**********************************************************************************
+//******** || Ket-Meng Jimmy Cheng ~ February 17, 2016 ~ EmployeeRecords || ********
+//******** || ---------------------------------------------------------- || ********
+//******** || This program reads from the List.txt input (specifically)  || ********
+//******** || then generates different types objects for each employee,  || ********
+//******** || depending on the employee's class. It then creates a list  || ********
+//******** || of the employees from highest to lowest paid along with a  || ********
+//******** || summary that includes the total payroll for the week, the  || ********
+//******** || total number of hours worked, and the number of employees  || ********
+//******** || in each class.                                             || ********
+//**********************************************************************************
+
+//If, for some reason this doesn't work, all code is listed under https://github.com/ketmengaos/Comparable.
+
 import java.io.*;
 import java.util.Scanner;
 import java.util.ArrayList;
@@ -41,16 +55,21 @@ public class EmployeeRecords {
             //Create a new array and store each new object inside the arraylist.
             ArrayList<Employee> employeeArray = new ArrayList<Employee>();
 
+            //General loop for continuing to read the document as long as it has a nextLine.
             while (scan.hasNextLine()) {
                 word = scan.nextLine();
-                String[] employee = word.split("[ ]"); //Splits each line via split method with appropriate regex to cut at every space.
+                String[] employee = word.split("[ ]"); //Splits each line via split method with appropriate regex to cut at every space. Admittedly, had to learn RegEx from the UC San Diego Coursera series on RegEx.
+
+                //This, then, assigns employee[0] to the ID number, employee[1] to the class of employee, employee[2] to the hourly wage, and employee[3] to the hoursWorked.
 
                 double hourlyWage = Double.parseDouble(employee[2]);
                 int hoursWorked = Integer.parseInt(employee[3]);
                 employeeClass = employee[1];
 
+
+                //Switch statements for figuring out which kind of employee employee[1] would be, then creating the appropiate objects.
                 switch (employee[1]) {
-                    case "H":
+                    case "H": //Hourly
                         HourlyEmployee hourlyEmployee = new HourlyEmployee(employee[0], hourlyWage, hoursWorked, employeeClass);
                         hourlyEmployee.calculatePay();
                         totalPayroll += hourlyEmployee.calculatePay();
@@ -59,7 +78,7 @@ public class EmployeeRecords {
                         employeeArray.add(hourlyEmployee);
                         hCount++;
                         break;
-                    case "S":
+                    case "S": //Salaried
                         SalariedEmployee salariedEmployee = new SalariedEmployee(employee[0], hourlyWage, hoursWorked, employeeClass);
                         salariedEmployee.calculatePay();
                         totalPayroll += salariedEmployee.calculatePay();
@@ -67,7 +86,7 @@ public class EmployeeRecords {
                         employeeArray.add(salariedEmployee);
                         sCount++;
                         break;
-                    case "P":
+                    case "P": //Part Time
                         PartTimeEmployee partTimeEmployee = new PartTimeEmployee(employee[0], hourlyWage, hoursWorked, employeeClass);
                         partTimeEmployee.calculatePay();
                         totalPayroll += partTimeEmployee.calculatePay();
@@ -75,7 +94,7 @@ public class EmployeeRecords {
                         employeeArray.add(partTimeEmployee);
                         pCount++;
                         break;
-                    case "I":
+                    case "I": //Intern
                         Intern intern = new Intern(employee[0], hourlyWage, hoursWorked, employeeClass);
                         intern.calculatePay();
                         totalHours += intern.getHours();
@@ -91,6 +110,7 @@ public class EmployeeRecords {
 
             Collections.sort(employeeArray);
 
+            //Makes the sorted employee list.
             System.out.println("Employee List: (Sort: Highest Paid)");
             for(int i = 0; i < employeeArray.size(); i++) {
                 System.out.println(employeeArray.get(i)); //Fetches each of the objects stored in our array.
