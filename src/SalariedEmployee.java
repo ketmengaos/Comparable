@@ -4,11 +4,13 @@ public class SalariedEmployee implements Employee {
     double wage;
     int hoursWorked;
     String idNumber;
+    String employeeClass;
 
-    public SalariedEmployee(String idNumber, double hourlyWage, int hoursWorked) {
+    public SalariedEmployee(String idNumber, double hourlyWage, int hoursWorked, String employeeClass) {
         this.idNumber = idNumber;
         this.hourlyWage = hourlyWage;
         this.hoursWorked = hoursWorked;
+        this.employeeClass = employeeClass;
     }
 
     public double calculatePay() {
@@ -25,11 +27,16 @@ public class SalariedEmployee implements Employee {
     }
 
     public int compareTo(Object o) {
-        SalariedEmployee pay = (SalariedEmployee) o;
-        if (this.wage > pay.wage)
-            return 1;
-        if (this.wage < pay.wage)
+        Employee otherType = (Employee)o;
+        double oWage = otherType.calculatePay();
+        if (this.wage > oWage)
             return -1;
+        else if (this.wage < oWage)
+            return 1;
         else return 0;
+    }
+
+    public String toString() {
+        return this.idNumber + " " + this.employeeClass + " " + this.hourlyWage + " " + this.hoursWorked;
     }
 }

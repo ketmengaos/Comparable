@@ -19,6 +19,7 @@ public class EmployeeRecords {
         double totalPayroll = 0;
         int totalHours = 0;
         int numEmployees = 0;
+        String employeeClass;
 
         int hCount = 0;
         int sCount = 0;
@@ -59,21 +60,24 @@ public class EmployeeRecords {
                 //totalHours += Integer.parseInt(employee[3]); // Parses the hours from each time card.
 
                 //Debugging
+                /*
                 System.out.print(employee[0] + " ");
                 System.out.print(employee[1] + " ");
                 System.out.print(employee[2] + " ");
                 System.out.print(employee[3] + " ");
                 System.out.println();
+                */
                 //End Debugging
 
                 double hourlyWage = Double.parseDouble(employee[2]);
                 int hoursWorked = Integer.parseInt(employee[3]);
+                employeeClass = employee[1];
 
                 //Create a new arrays and store each new object inside the arrayslist.
 
                 switch (employee[1]) {
                     case "H":
-                        HourlyEmployee hourlyEmployee = new HourlyEmployee(employee[0], hourlyWage, hoursWorked);
+                        HourlyEmployee hourlyEmployee = new HourlyEmployee(employee[0], hourlyWage, hoursWorked, employeeClass);
                         hourlyEmployee.calculatePay();
                         totalPayroll += hourlyEmployee.calculatePay();
                         hourlyEmployee.getPay();
@@ -82,7 +86,7 @@ public class EmployeeRecords {
                         hCount++;
                         break;
                     case "S":
-                        SalariedEmployee salariedEmployee = new SalariedEmployee(employee[0], hourlyWage, hoursWorked);
+                        SalariedEmployee salariedEmployee = new SalariedEmployee(employee[0], hourlyWage, hoursWorked, employeeClass);
                         salariedEmployee.calculatePay();
                         totalPayroll += salariedEmployee.calculatePay();
                         totalHours += salariedEmployee.getHours();
@@ -90,7 +94,7 @@ public class EmployeeRecords {
                         sCount++;
                         break;
                     case "P":
-                        PartTimeEmployee partTimeEmployee = new PartTimeEmployee(employee[0], hourlyWage, hoursWorked);
+                        PartTimeEmployee partTimeEmployee = new PartTimeEmployee(employee[0], hourlyWage, hoursWorked, employeeClass);
                         partTimeEmployee.calculatePay();
                         totalPayroll += partTimeEmployee.calculatePay();
                         totalHours += partTimeEmployee.getHours();
@@ -98,7 +102,7 @@ public class EmployeeRecords {
                         pCount++;
                         break;
                     case "I":
-                        Intern intern = new Intern(employee[0], hourlyWage, hoursWorked);
+                        Intern intern = new Intern(employee[0], hourlyWage, hoursWorked, employeeClass);
                         intern.calculatePay();
                         totalHours += intern.getHours();
                         employeeArray.add(intern);
@@ -113,8 +117,9 @@ public class EmployeeRecords {
 
             Collections.sort(employeeArray);
 
+            System.out.println("Employee List: (Sort: Highest Paid)");
             for(int i = 0; i < employeeArray.size(); i++) {
-                System.out.println(employeeArray.get(i) + "\n");
+                System.out.println(employeeArray.get(i));
 
             }
 
@@ -122,6 +127,8 @@ public class EmployeeRecords {
             System.out.println("Error: File not found. Please try again.");
             System.exit(0);
         }
+        System.out.println();
+        System.out.println("Total Payroll for the Week: " + totalPayroll);
         System.out.println("Total Hours Worked: " + totalHours);
         System.out.println("Total Employees:");
         System.out.println("Hourly Employees: " + hCount);
