@@ -2,19 +2,26 @@ public class HourlyEmployee implements Employee {
 
     double wage;
     double hourlyWage;
-    double hours;
+    String idNumber;
+    int hoursWorked;
     int empCount = 0;
 
-    public double calculatePay(double hourlyWage, double hoursWorked) {
+    public HourlyEmployee(String idNumber, double hourlyWage, int hoursWorked) {
+        this.idNumber = idNumber;
+        this.hourlyWage = hourlyWage;
+        this.hoursWorked = hoursWorked;
+    }
+
+    public double calculatePay(double hourlyWage, int hoursWorked) {
         if (hoursWorked > 40) {
-            wage = hourlyWage * 40;
-            wage += (hourlyWage * 1.5) * (hoursWorked - 40);
-            wage *= 1.2;
+            this.wage = hourlyWage * 40;
+            this.wage += (hourlyWage * 1.5) * (hoursWorked - 40);
+            this.wage *= 1.2;
             this.empCount++;
-            return wage;
+            return this.wage;
         } else {
-            wage = hourlyWage * hoursWorked;
-            return wage;
+            this.wage = (hourlyWage * hoursWorked) * 1.2;
+            return this.wage;
         }
     }
 
@@ -26,13 +33,18 @@ public class HourlyEmployee implements Employee {
         return hoursWorked;
     }
 
-    public int compareTo(Object o) {
-        Time time = (Time)o;
-        if(hours != time.hours)
-            return hours - time.hours;
-        if(minutes != time.minutes)
-            return minutes - time.minutes;
-        return seconds - time.seconds;
+    public int compareTo(Object o, String string) {
+        HourlyEmployee pay = (pay)o;
+
+        if (this.wage > pay.wage)
+            return 1;
+        if (this.wage < pay.wage)
+            return -1;
+        else return 0;
+    }
+
+    public String toString() {
+
     }
 
 }

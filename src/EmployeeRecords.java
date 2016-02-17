@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class EmployeeRecords {
 
@@ -15,6 +17,7 @@ public class EmployeeRecords {
     public static void main(String[] arg) {
 
         int totalHours = 0;
+        int counter = 0;
         int numEmployees = 0;
         int lines = 0;
 
@@ -23,6 +26,7 @@ public class EmployeeRecords {
         //ID Number | Class | Wage (Or Weekly Payment if Salaried Employee) | Hours Worked.
         //Each value is separated by a space.
         //I used this to extract the number of lines for the arrays that will order the employees.
+
         try {
             BufferedReader reader = new BufferedReader(new FileReader("List.txt"));
             while (reader.readLine() != null)
@@ -33,23 +37,19 @@ public class EmployeeRecords {
         } catch (IOException e) {
             System.out.print("IO Exception Error.");
         }
-        EmployeesArray employeesArray = new EmployeesArray(); //Constructs the employee list.
-        employeesArray.employeeList(lines);
 
         String word;
         try {
             Scanner scan = new Scanner(new FileReader("List.txt"));
-            HourlyEmployee hourlyEmployee = new HourlyEmployee();
-            SalariedEmployee salariedEmployee = new SalariedEmployee();
-            PartTimeEmployee partTimeEmployee = new PartTimeEmployee();
-            Intern intern = new Intern();
+
+            ArrayList<Employee> employeeArray = new ArrayList<Employee>();
 
             while (scan.hasNextLine()) {
                 word = scan.nextLine();
                 String[] employee = word.split("[ ]");
 
-                totalHours += Integer.parseInt(employee[3]);
-                totalHours += Integer.parseInt(employee[3]); // Parses the hours from each time card.
+                //Unnecessary, saved for future use if needed.
+                //totalHours += Integer.parseInt(employee[3]); // Parses the hours from each time card.
 
                 //Debugging
                 System.out.print(employee[0] + " ");
@@ -62,30 +62,36 @@ public class EmployeeRecords {
                 double hourlyWage = Double.parseDouble(employee[2]);
                 int hoursWorked = Integer.parseInt(employee[3]);
 
+                //Create a new arrays and store each new object inside the arrayslist.
+
                 switch (employee[1]) {
                     case "H":
+                        HourlyEmployee hourlyEmployee = new HourlyEmployee(employee[0], hourlyWage, hoursWorked);
                         hourlyEmployee.calculatePay(hourlyWage, hoursWorked);
-                        hourlyEmployee.getPay(hourlyWage);
-                        hourlyEmployee.getHours(hoursWorked);
-                        hourlyEmployee.compareTo();
+                        totalHours += hourlyEmployee.getHours(hoursWorked);
+                        employeeArray.add(hourlyEmployee);
+                        counter++;
                         break;
                     case "S":
+                        SalariedEmployee salariedEmployee = new SalariedEmployee(employee[0], hourlyWage, hoursWorked);
                         salariedEmployee.calculatePay(hourlyWage);
-                        salariedEmployee.getPay(hourlyWage);
-                        salariedEmployee.getHours(hoursWorked);
-                        salariedEmployee.compareTo();
+                        totalHours += salariedEmployee.getHours(hoursWorked);
+                        employeeArray.add(salariedEmployee);
+                        counter++;
                         break;
                     case "P":
+                        PartTimeEmployee partTimeEmployee = new PartTimeEmployee(employee[0], hourlyWage, hoursWorked);
                         partTimeEmployee.calculatePay(hourlyWage, hoursWorked);
-                        partTimeEmployee.getPay(hourlyWage);
-                        partTimeEmployee.getHours(hoursWorked);
-                        partTimeEmployee.compareTo();
+                        totalHours += partTimeEmployee.getHours(hoursWorked);
+                        employeeArray.add(partTimeEmployee);
+                        counter++;
                         break;
                     case "I":
+                        Intern intern = new Intern(employee[0], hourlyWage, hoursWorked);
                         intern.calculatePay();
-                        intern.getPay();
-                        intern.getHours(hoursWorked);
-                        intern.compareTo();
+                        totalHours += intern.getHours(hoursWorked);
+                        employeeArray.add(intern);
+                        counter++;
                         break;
                     default:
                         System.out.println("Illegal Parameter. Closing program.");
@@ -93,6 +99,9 @@ public class EmployeeRecords {
                         break;
                 }
             }
+
+            Collections.sort(employeeArray);
+
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found. Please try again.");
             System.exit(0);

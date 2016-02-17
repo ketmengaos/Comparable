@@ -1,12 +1,21 @@
 public class SalariedEmployee implements Employee {
 
-    int empCount = 0;
+    String idNumber;
+    double hourlyWage; //Note, hourlyWage will simply refer to their weekly pay.
     double wage;
+    int hoursWorked;
+    int empCount = 0;
+
+    public SalariedEmployee(String idNumber, double hourlyWage, int hoursWorked) {
+        this.idNumber = idNumber;
+        this.hourlyWage = hourlyWage;
+        this.hoursWorked = hoursWorked;
+    }
 
     public double calculatePay(double hourlyWage) {
-        wage = hourlyWage * 1.2;
+        this.wage = hourlyWage * 1.2;
         this.empCount++;
-        return wage;
+        return this.wage;
     }
 
     public double getPay(double hourlyWage) {
@@ -18,6 +27,11 @@ public class SalariedEmployee implements Employee {
     }
 
     public int compareTo(Object o) {
-
+        SalariedEmployee pay = (pay)o;
+        if (this.wage > pay.wage)
+            return 1;
+        if (this.wage < pay.wage)
+            return -1;
+        else return 0;
     }
 }
