@@ -110,7 +110,7 @@ public class EmployeeRecords {
 
             //Makes the sorted employee list.
             System.out.println("Employee List: (Sort: Highest Paid)");
-            for(int i = 0; i < employeeArray.size(); i++) {
+            for (int i = 0; i < employeeArray.size(); i++) {
                 System.out.println(employeeArray.get(i)); //Fetches each of the objects stored in our array.
             }
 

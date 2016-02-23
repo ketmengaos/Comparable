@@ -1,12 +1,13 @@
-public class SalariedEmployee implements Employee {
+public class SalariedEmployee extends EmployeeExtension implements Employee {
 
-    double hourlyWage; //Note, hourlyWage will simply refer to their weekly pay.
-    double wage;
-    int hoursWorked;
-    String idNumber;
-    String employeeClass;
+    protected double hourlyWage; //Note, hourlyWage will simply refer to their weekly pay.
+    protected double wage;
+    protected int hoursWorked;
+    protected String idNumber;
+    protected String employeeClass;
 
     public SalariedEmployee(String idNumber, double hourlyWage, int hoursWorked, String employeeClass) {
+        super(idNumber, hourlyWage, hoursWorked, employeeClass);
         this.idNumber = idNumber;
         this.hourlyWage = hourlyWage;
         this.hoursWorked = hoursWorked;
@@ -16,27 +17,5 @@ public class SalariedEmployee implements Employee {
     public double calculatePay() {
         this.wage = this.hourlyWage * 1.2;
         return this.wage;
-    }
-
-    public double getPay() {
-        return this.hourlyWage;
-    }
-
-    public int getHours() {
-        return this.hoursWorked;
-    }
-
-    public int compareTo(Object o) {
-        Employee otherType = (Employee)o;
-        double oWage = otherType.calculatePay();
-        if (this.wage > oWage)
-            return -1;
-        else if (this.wage < oWage)
-            return 1;
-        else return 0;
-    }
-
-    public String toString() {
-        return this.idNumber + " " + this.employeeClass + " " + this.hourlyWage + " " + this.hoursWorked;
     }
 }

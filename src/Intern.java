@@ -1,4 +1,4 @@
-public class Intern implements Employee{
+public class Intern extends EmployeeExtension implements Employee {
 
     double hourlyWage;
     double wage;
@@ -7,6 +7,7 @@ public class Intern implements Employee{
     String employeeClass;
 
     public Intern(String idNumber, double hourlyWage, int hoursWorked, String employeeClass) {
+        super(idNumber, hourlyWage, hoursWorked, employeeClass);
         this.idNumber = idNumber;
         this.hourlyWage = hourlyWage;
         this.hoursWorked = hoursWorked;
@@ -16,27 +17,5 @@ public class Intern implements Employee{
     public double calculatePay() {
         this.wage = 0;
         return 0;
-    }
-
-    public double getPay() {
-        return 0;
-    }
-
-    public int getHours() {
-        return this.hoursWorked;
-    }
-
-    public int compareTo(Object o) {
-        Employee otherType = (Employee)o;
-        double oWage = otherType.calculatePay();
-        if (this.wage > oWage)
-            return -1;
-        else if (this.wage < oWage)
-            return 1;
-        else return 0;
-    }
-
-    public String toString() {
-        return this.idNumber + " " + this.employeeClass + " " + this.hourlyWage + " " + this.hoursWorked;
     }
 }
